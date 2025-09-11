@@ -1,122 +1,104 @@
+// Importa o pacote material.dart, que contém os widgets do Flutter que implementam o Material Design.
 import 'package:flutter/material.dart';
 
+// A função main() é o ponto de entrada da aplicação.
 void main() {
+  // runApp() infla o widget fornecido e o anexa à tela.
   runApp(const MyApp());
 }
 
+// MyApp é um widget sem estado (StatelessWidget), o que significa que ele descreve uma parte da interface do usuário que não depende de nada além das informações de configuração (os parâmetros passados para ele).
 class MyApp extends StatelessWidget {
+  // O construtor para este widget. A anotação {super.key} passa a chave para o construtor da superclasse.
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  // Este widget é a raiz da sua aplicação.
   @override
   Widget build(BuildContext context) {
+    // MaterialApp é um widget que envolve vários outros widgets que são comumente necessários para aplicações Material Design.
     return MaterialApp(
+      // O título da aplicação, usado pelo sistema operacional para identificar a aplicação.
       title: 'Flutter Demo',
+      // O tema da aplicação, que define a aparência visual, como cores, fontes, etc.
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
+        // ColorScheme.fromSeed() cria um esquema de cores a partir de uma única cor semente.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
+      // O widget que será exibido na rota inicial (a "home") da aplicação.
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
+// MyHomePage é um widget com estado (StatefulWidget), o que significa que ele pode manter um estado que pode mudar durante a vida do widget.
 class MyHomePage extends StatefulWidget {
+  // Construtor do widget. Ele recebe um título.
   const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
+  // Esta classe é a configuração para o estado. Ela contém os valores (neste caso, o título) fornecidos pelo pai (o widget App).
+  // Os campos em uma subclasse de Widget são sempre marcados como "final".
   final String title;
 
+  // Cria o objeto de estado mutável para este widget.
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+// A classe de estado para MyHomePage. O "_" no início do nome a torna privada para a biblioteca.
 class _MyHomePageState extends State<MyHomePage> {
+  // Uma variável de estado para armazenar o número de vezes que o botão foi pressionado.
   int _counter = 0;
 
+  // Um método que incrementa o contador.
   void _incrementCounter() {
+    // setState() notifica o Flutter framework que o estado interno deste objeto mudou.
+    // Isso faz com que o framework execute novamente o método build() abaixo para que a exibição possa refletir os valores atualizados.
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
       _counter++;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    // Este método é executado novamente toda vez que setState é chamado.
+    // O framework do Flutter foi otimizado para tornar a reexecução dos métodos de build rápida.
+    // Scaffold é um widget que implementa a estrutura visual básica do Material Design.
     return Scaffold(
+      // A barra de aplicativos na parte superior da tela.
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
+        // Define a cor de fundo da AppBar usando o esquema de cores do tema.
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
+        // O título exibido na AppBar, obtido do objeto MyHomePage.
         title: Text(widget.title),
       ),
+      // O corpo principal da tela.
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+        // Center é um widget de layout que centraliza seu filho.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
+          // Column é um widget de layout que organiza seus filhos verticalmente.
+          // mainAxisAlignment.center centraliza os filhos verticalmente.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('You have pushed the button this many times:'),
+            // Um widget de texto estático.
+            const Text('Você pressionou o botão tantas vezes:'),
+            // Um widget de texto que exibe o valor atual do contador.
             Text(
               '$_counter',
+              // Estiliza o texto usando o estilo headlineMedium do tema.
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
       ),
+      // Um botão de ação flutuante.
       floatingActionButton: FloatingActionButton(
+        // A função que é chamada quando o botão é pressionado.
         onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        // Um texto de dica que aparece quando o usuário passa o mouse sobre o botão.
+        tooltip: 'Incrementar',
+        // O ícone exibido no botão.
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
