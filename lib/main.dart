@@ -1,60 +1,58 @@
-// Importa o pacote material.dart, que contém os widgets do Flutter que implementam o Material Design.
 import 'package:flutter/material.dart';
 
-// A função main() é o ponto de entrada da aplicação.
 void main() {
-  // runApp() infla o widget fornecido e o anexa à tela.
-  runApp(const MyApp());
+  runApp(const MyApp()); //superclasse
 }
 
-// MyApp é um widget sem estado (StatelessWidget), o que significa que ele descreve uma parte da interface do usuário que não depende de nada além das informações de configuração (os parâmetros passados para ele).
 class MyApp extends StatelessWidget {
-  // O construtor para este widget. A anotação {super.key} passa a chave para o construtor da superclasse.
   const MyApp({super.key});
 
-  // Este widget é a raiz da sua aplicação.
   @override
   Widget build(BuildContext context) {
-    // MaterialApp é um widget que envolve vários outros widgets que são comumente necessários para aplicações Material Design.
+    // MaterialApp envolve os demais
     return MaterialApp(
-      // O título da aplicação, usado pelo sistema operacional para identificar a aplicação.
-      title: 'Flutter Demo',
-      // O tema da aplicação, que define a aparência visual, como cores, fontes, etc.
+      // titulo da aplicação
+      title: 'Manipulação da interface',
+      //tema do app
       theme: ThemeData(
-        // ColorScheme.fromSeed() cria um esquema de cores a partir de uma única cor semente.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromARGB(255, 61, 96, 194),
+        ),
       ),
-      // O widget que será exibido na rota inicial (a "home") da aplicação.
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+
+      home: const MyHomePage(title: 'Flutter primeiro contato com a interface'),
     );
   }
 }
 
-// MyHomePage é um widget com estado (StatefulWidget), o que significa que ele pode manter um estado que pode mudar durante a vida do widget.
+// MyHomePage é um widget com estado (StatefulWidget)
 class MyHomePage extends StatefulWidget {
-  // Construtor do widget. Ele recebe um título.
   const MyHomePage({super.key, required this.title});
-
-  // Esta classe é a configuração para o estado. Ela contém os valores (neste caso, o título) fornecidos pelo pai (o widget App).
-  // Os campos em uma subclasse de Widget são sempre marcados como "final".
   final String title;
 
-  // Cria o objeto de estado mutável para este widget.
+  // Cria o objeto de estado mutável widget.
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-// A classe de estado para MyHomePage. O "_" no início do nome a torna privada para a biblioteca.
+// A classe de estado para MyHomePage._privada
 class _MyHomePageState extends State<MyHomePage> {
-  // Uma variável de estado para armazenar o número de vezes que o botão foi pressionado.
+  // Uma variável de estado para o contador
   int _counter = 0;
 
   // Um método que incrementa o contador.
   void _incrementCounter() {
-    // setState() notifica o Flutter framework que o estado interno deste objeto mudou.
-    // Isso faz com que o framework execute novamente o método build() abaixo para que a exibição possa refletir os valores atualizados.
+    // setState() notifica o estado interno do widget para que ele seja atualizado.
+    // Isso faz com que o framework execute o build()
     setState(() {
       _counter++;
+    });
+  }
+
+  // Um método que decremeta o contador.
+  void _decrementCounter() {
+    setState(() {
+      _counter--;
     });
   }
 
@@ -63,42 +61,80 @@ class _MyHomePageState extends State<MyHomePage> {
     // Este método é executado novamente toda vez que setState é chamado.
     // O framework do Flutter foi otimizado para tornar a reexecução dos métodos de build rápida.
     // Scaffold é um widget que implementa a estrutura visual básica do Material Design.
-    return Scaffold(
-      // A barra de aplicativos na parte superior da tela.
-      appBar: AppBar(
-        // Define a cor de fundo da AppBar usando o esquema de cores do tema.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // O título exibido na AppBar, obtido do objeto MyHomePage.
-        title: Text(widget.title),
-      ),
-      // O corpo principal da tela.
-      body: Center(
-        // Center é um widget de layout que centraliza seu filho.
-        child: Column(
-          // Column é um widget de layout que organiza seus filhos verticalmente.
-          // mainAxisAlignment.center centraliza os filhos verticalmente.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            // Um widget de texto estático.
-            const Text('Você pressionou o botão tantas vezes:'),
-            // Um widget de texto que exibe o valor atual do contador.
-            Text(
-              '$_counter',
-              // Estiliza o texto usando o estilo headlineMedium do tema.
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+  return Scaffold(
+  // A barra de aplicativos na parte superior da tela.
+  appBar: AppBar(
+    // Define a cor de fundo da AppBar usando o esquema de cores do tema.
+    backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+    // O título exibido na AppBar, obtido do objeto MyHomePage.
+    title: Text(widget.title),
+  ),
+  // O corpo principal da tela.
+  body: Center(
+    // Center é um widget de layout que centraliza seu filho.
+    child: Column(
+      // Column é um widget de layout que organiza seus filhos verticalmente.
+      // mainAxisAlignment.center centraliza os filhos verticalmente.
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        // Um widget de texto estático.
+        const Text('Você pressionou o botão tantas vezes:'),
+        // Um widget de texto que exibe o valor atual do contador, com fonte maior.
+        Text(
+          '$_counter',
+          // Estiliza o texto usando o estilo headlineMedium do tema, com tamanho ajustado.
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 30),
         ),
-      ),
-      // Um botão de ação flutuante.
-      floatingActionButton: FloatingActionButton(
-        // A função que é chamada quando o botão é pressionado.
-        onPressed: _incrementCounter,
-        // Um texto de dica que aparece quando o usuário passa o mouse sobre o botão.
-        tooltip: 'Incrementar',
-        // O ícone exibido no botão.
-        child: const Icon(Icons.add),
-      ),
-    );
+        // Espaçamento vertical entre o texto e os botões.
+        const SizedBox(height: 32),
+
+        // 1. BOTÃO DE INCREMENTAR ESTILIZADO COM BORDA
+        ElevatedButton.icon(
+          onPressed: _incrementCounter,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.deepPurple,
+            foregroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              // A borda é definida aqui
+              side: const BorderSide(color: Colors.deepPurpleAccent, width: 2),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            textStyle: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          icon: const Icon(Icons.add),
+          label: const Text('Incrementar'),
+        ),
+        const SizedBox(height: 16),
+
+        // 2. BOTÃO DE DECREMENTAR ESTILIZADO COM BORDA
+        TextButton.icon(
+          onPressed: _decrementCounter,
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.black87,
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            textStyle: const TextStyle(
+              fontSize: 16,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              // A borda é definida aqui
+              side: const BorderSide(color: Colors.grey, width: 1),
+            ),
+          ),
+          icon: const Icon(Icons.remove),
+          label: const Text('Decrementar'),
+        ),
+        
+        // 
+      ],
+    ),
+  ),
+  // O botão de ação flutuante foi removido para uma UI mais limpa.
+);
   }
 }
+//crt + shift + i = identação
