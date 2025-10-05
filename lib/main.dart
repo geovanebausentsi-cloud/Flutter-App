@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'components.dart';
 
 void main() {
   runApp(const MyApp()); //superclasse
@@ -61,80 +62,123 @@ class _MyHomePageState extends State<MyHomePage> {
     // Este método é executado novamente toda vez que setState é chamado.
     // O framework do Flutter foi otimizado para tornar a reexecução dos métodos de build rápida.
     // Scaffold é um widget que implementa a estrutura visual básica do Material Design.
-  return Scaffold(
-  // A barra de aplicativos na parte superior da tela.
-  appBar: AppBar(
-    // Define a cor de fundo da AppBar usando o esquema de cores do tema.
-    backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-    // O título exibido na AppBar, obtido do objeto MyHomePage.
-    title: Text(widget.title),
-  ),
-  // O corpo principal da tela.
-  body: Center(
-    // Center é um widget de layout que centraliza seu filho.
-    child: Column(
-      // Column é um widget de layout que organiza seus filhos verticalmente.
-      // mainAxisAlignment.center centraliza os filhos verticalmente.
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        // Um widget de texto estático.
-        const Text('Você pressionou o botão tantas vezes:'),
-        // Um widget de texto que exibe o valor atual do contador, com fonte maior.
-        Text(
-          '$_counter',
-          // Estiliza o texto usando o estilo headlineMedium do tema, com tamanho ajustado.
-          style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 30),
-        ),
-        // Espaçamento vertical entre o texto e os botões.
-        const SizedBox(height: 32),
+    return Scaffold(
+      // A barra de aplicativos na parte superior da tela.
+      appBar: AppBar(
+        // Define a cor de fundo da AppBar usando o esquema de cores do tema.
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        // O título exibido na AppBar, obtido do objeto MyHomePage.
+        title: Text(widget.title),
+      ),
 
-        // 1. BOTÃO DE INCREMENTAR ESTILIZADO COM BORDA
-        ElevatedButton.icon(
-          onPressed: _incrementCounter,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.deepPurple,
-            foregroundColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-              // A borda é definida aqui
-              side: const BorderSide(color: Colors.deepPurpleAccent, width: 2),
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-            textStyle: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+      drawer: Drawer(
+        child: SafeArea(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                ),
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Text(
+                    'Menu',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                ),
+              ),
+              ListTile(
+                leading: const Icon(Icons.pages),
+                title: const Text('Componentes'),
+                onTap: () {
+                  Navigator.pop(context); // fecha o drawer
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const ComponentsPage()),
+                  );
+                },
+              ),
+            ],
           ),
-          icon: const Icon(Icons.add),
-          label: const Text('Incrementar'),
         ),
-        const SizedBox(height: 16),
+      ),
+      
+      // O corpo principal da tela.
+      body: Center(
+        // Center é um widget de layout que centraliza seu filho.
+        child: Column(
+          // Column é um widget de layout que organiza seus filhos verticalmente.
+          // mainAxisAlignment.center centraliza os filhos verticalmente.
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            // Um widget de texto estático.
+            const Text('Você pressionou o botão tantas vezes:'),
+            // Um widget de texto que exibe o valor atual do contador, com fonte maior.
+            Text(
+              '$_counter',
+              // Estiliza o texto usando o estilo headlineMedium do tema, com tamanho ajustado.
+              style: Theme.of(
+                context,
+              ).textTheme.headlineMedium?.copyWith(fontSize: 30),
+            ),
+            // Espaçamento vertical entre o texto e os botões.
+            const SizedBox(height: 32),
 
-        // 2. BOTÃO DE DECREMENTAR ESTILIZADO COM BORDA
-        TextButton.icon(
-          onPressed: _decrementCounter,
-          style: TextButton.styleFrom(
-            foregroundColor: Colors.black87,
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            textStyle: const TextStyle(
-              fontSize: 16,
+            // 1. BOTÃO DE INCREMENTAR ESTILIZADO COM BORDA
+            ElevatedButton.icon(
+              onPressed: _incrementCounter,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  // A borda é definida aqui
+                  side: const BorderSide(
+                    color: Colors.deepPurpleAccent,
+                    width: 2,
+                  ),
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 16,
+                ),
+                textStyle: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              icon: const Icon(Icons.add),
+              label: const Text('Incrementar'),
             ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-              // A borda é definida aqui
-              side: const BorderSide(color: Colors.grey, width: 1),
+            const SizedBox(height: 16),
+
+            // 2. BOTÃO DE DECREMENTAR ESTILIZADO COM BORDA
+            TextButton.icon(
+              onPressed: _decrementCounter,
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.black87,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 12,
+                ),
+                textStyle: const TextStyle(fontSize: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  // A borda é definida aqui
+                  side: const BorderSide(color: Colors.grey, width: 1),
+                ),
+              ),
+              icon: const Icon(Icons.remove),
+              label: const Text('Decrementar'),
             ),
-          ),
-          icon: const Icon(Icons.remove),
-          label: const Text('Decrementar'),
+
+            //
+          ],
         ),
-        
-        // 
-      ],
-    ),
-  ),
-  // O botão de ação flutuante foi removido para uma UI mais limpa.
-);
+      ),
+      // O botão de ação flutuante foi removido para uma UI mais limpa.
+    );
   }
 }
 //crt + shift + i = identação
