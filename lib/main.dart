@@ -177,7 +177,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      // O botão de ação flutuante foi removido para uma UI mais limpa.
+    
     );
   }
 }
