@@ -1,16 +1,11 @@
-# myapp
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Componentes no Flutter
+ No Flutter, entre os principais, estão os botões (ElevatedButton, 
+OutlinedButton, TextButton, FilledButton, IconButton e 
+SegmentedButton), que permitem interações diretas do usuário. 
+Os Badges e Chips destacam informações ou categorias, 
+enquanto o AlertDialog exibe mensagens e confirmações rápidas. 
+Os Checkbox, Radio, Switch e Slider são usados para seleções e 
+ajustes de valores. Já o TextField possibilita entrada de texto, 
+sendo essencial em formulários e buscas. O Menu e o 
+DropdownButton oferecem opções organizadas e intuitivas.
+ 
