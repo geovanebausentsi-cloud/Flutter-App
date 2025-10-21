@@ -1,0 +1,25 @@
+Este projeto é um aplicativo em Flutter que simula um terminal interativo, com o tema do universo de "Brasil, 2097".
+
+Aqui está uma explicação de cada parte do código:
+
+**lib/main.dart:**
+- Este é o ponto de entrada do aplicativo.
+- Ele inicializa o aplicativo Flutter e define a aparência geral (tema) e a tela inicial.
+- `TerminalView` é definido como a tela principal.
+
+**lib/terminal_view.dart:**
+- Este arquivo contém a interface do usuário (UI) do terminal.
+- Ele gerencia a entrada do usuário (o que você digita) e a saída (as respostas do terminal).
+- Ele usa um `TextField` para a entrada de comandos e um `ListView` para exibir o histórico de comandos e respostas.
+- `CommandHandler` é usado para processar os comandos digitados.
+
+**lib/command.dart:**
+- Este arquivo define a lógica para todos os comandos disponíveis no terminal.
+- A classe `Command` é uma classe base abstrata para todos os comandos.
+- `CommandHandler` é responsável por registrar e executar os comandos.
+- Classes de comando específicas (`HelpCommand`, `AboutCommand`, `CharactersCommand`, `GalleryCommand`, `ClearCommand`) herdam da classe `Command` e implementam a lógica para suas respectivas ações.
+
+**lib/data.dart:**
+- Este arquivo armazena todos os dados estáticos do aplicativo, como a história (lore), informações sobre os personagens e os caminhos para as imagens da HQ.
+- A classe `AppData` atua como um contêiner para esses dados.
+- `ImageData` e `Character` são classes de modelo que definem a estrutura dos dados das imagens e dos personagens, respectivamente.
