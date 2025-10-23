@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'components.dart';
+import 'theme.dart';
 
 void main() {
   runApp(const MyApp()); //superclasse
@@ -15,11 +16,10 @@ class MyApp extends StatelessWidget {
       // titulo da aplicação
       title: 'Manipulação da interface',
       //tema do app
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromARGB(255, 61, 96, 194),
-        ),
-      ),
+        darkTheme: ThemeData(
+       colorScheme: MaterialTheme.darkScheme(),
+       useMaterial3: true,
+     ),
 
       home: const MyHomePage(title: 'Flutter primeiro contato com a interface'),
     );
@@ -103,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      
+
       // O corpo principal da tela.
       body: Center(
         // Center é um widget de layout que centraliza seu filho.
