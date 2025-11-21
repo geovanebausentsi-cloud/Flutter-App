@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'components.dart';
+import 'students_page.dart';
+import 'theme.dart';
 
 void main() {
   runApp(const MyApp()); //superclasse
@@ -15,11 +17,8 @@ class MyApp extends StatelessWidget {
       // titulo da aplicação
       title: 'Manipulação da interface',
       //tema do app
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromARGB(255, 61, 96, 194),
-        ),
-      ),
+      theme: MaterialTheme(Theme.of(context).textTheme).light(),
+      darkTheme: MaterialTheme(Theme.of(context).textTheme).dark(),
 
       home: const MyHomePage(title: 'Flutter primeiro contato com a interface'),
     );
@@ -99,11 +98,33 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
                 },
               ),
+              ListTile(
+                leading: const Icon(Icons.pages),
+                title: const Text('Componentes'),
+                onTap: () {
+                  Navigator.pop(context); // fecha o drawer
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const ComponentsPage()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.person),
+                title: const Text('Alunos'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const StudentsPage()),
+                  );
+                },
+              ),
             ],
           ),
         ),
       ),
-      
+
       // O corpo principal da tela.
       body: Center(
         // Center é um widget de layout que centraliza seu filho.

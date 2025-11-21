@@ -384,28 +384,26 @@ class _ComponentsPageState extends State<ComponentsPage> {
              '16 - Radio',
              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
            ),
-           Row(
+           Column(
              children: [
-               Radio<String>(
+               RadioListTile<String>(
+                 title: const Text('A'),
                  value: 'A',
                  groupValue: _radio,
                  onChanged: (v) => setState(() => _radio = v!),
                ),
-               const Text('A'),
-               const SizedBox(width: 12),
-               Radio<String>(
+               RadioListTile<String>(
+                 title: const Text('B'),
                  value: 'B',
                  groupValue: _radio,
                  onChanged: (v) => setState(() => _radio = v!),
                ),
-               const Text('B'),
-               const SizedBox(width: 12),
-               Radio<String>(
+               RadioListTile<String>(
+                 title: const Text('C'),
                  value: 'C',
                  groupValue: _radio,
                  onChanged: (v) => setState(() => _radio = v!),
                ),
-               const Text('C'),
              ],
            ),
            const SizedBox(height: 20),
